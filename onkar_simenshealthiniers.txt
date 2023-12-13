@@ -1,0 +1,34 @@
+string closestWord(vector<string>&dict, string word,int n)
+{
+    int ans=INT_MAX;
+    int mp1[26]={0};
+    string res="";
+    for(int i=0;i<word.size();i++)
+    {
+       mp1[word[i]-'a']++; 
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        string s=dict[i];
+        int temp=0;
+        int mp2[26]={0};
+        for(int j=0;j<s.size();j++)
+        {
+            mp2[s[j]-'a']++;
+        }
+        
+        
+        for(int k=0;k<26;k++)
+        {
+            temp+=abs(mp2[k]-mp1[k]);
+        }
+        
+       if (temp < ans || (temp == ans && s < res)) { // Check lexicographical order
+            ans = temp;
+            res = s;
+        }
+        
+    }
+    return res;
+}
